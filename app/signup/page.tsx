@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import styles from './signup.module.css'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Page = () => {
@@ -14,15 +17,40 @@ const Page = () => {
   const [commitee, setCommitee] = useState('')
   const [passoutyear, setPassoutYear] = useState('')
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    // Handle sign-in logic here
+    await axios.post('http://localhost:3000/api/users/register', {
+      email: email,
+      username: username,
+      age: 1,
+      role: 'student',
+      password: password,
+      departmentOfStudy: department,
+      committeeBelonging: commitee,
+      educationEndYear: passoutyear
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'will be added later'
+      }
+    }).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      //add toast to display the error message
+      toast.error(error.response.data.message);
+      
+      console.log(error.response.data.message);
+    })
   }
 
   const handleOptionChange = (event: any) => {
     setDepartment(event.target.value);
   };
 
+  const handleCommitte = (event: any) => {
+    setCommitee(event.target.value);
+  };
 
   return (
     <div className={styles.container}>
@@ -61,7 +89,7 @@ const Page = () => {
             onChange={(e) => setPassoutYear(e.target.value)}
             className={styles.input}
           />
-          <select value={department} onChange={handleOptionChange} className='h-10 p-2'>
+          <select value={commitee} onChange={handleCommitte} className='h-10 p-2'>
             <option value="">Select your Commitee</option>
             <option value="option1">Cultural</option>
             <option value="option2">Technical</option>
@@ -101,6 +129,7 @@ const Page = () => {
             Forgot Password?
           </a>
         </p>
+        <ToastContainer/>
       </main>
     </div>
   )
