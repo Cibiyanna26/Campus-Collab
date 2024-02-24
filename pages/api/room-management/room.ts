@@ -6,14 +6,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const method = req.method;
     switch (method) {
         case "GET":
-            try {
-                const data = await roomModel.find({}).exec();
-                return res.status(200).json({ error: false, message: data });
-            } catch (err) {
-                return res.status(500).json({ error: true, message: err });
-            }
+            await authenticateMiddleware(req,res, async()=>{
+                const token = req.cookies.token as string;
+                const tokenDetials = userDetailsFromToken(token) as UserPayload;
+                try {
+                    const data = await roomModel.find({}).exec();
+                    return res.status(200).json({ error: false, message: data });
+                } catch (err) {
+                    return res.status(500).json({ error: true, message: err });
+                }
+            })
             break;
-
         case "POST":
             await authenticateMiddleware(req,res, async()=>{
                 const token = req.cookies.token as string;
