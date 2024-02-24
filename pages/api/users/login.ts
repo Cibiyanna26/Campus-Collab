@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import UserModel from '@/models/userModel';
-import { generateJWT } from '@/service/user.service';
+import { generateJWT, getTokenDetails } from '@/service/user.service';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Your logic here
@@ -21,15 +21,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!existingUser) {
       return res.status(400).json({error:true, message: 'username doesn"t exist' });
     }
+
+    const email : string = existingUser.email;
+    const role : string = existingUser.role;
     const dbpassword :string = existingUser.password;
+
     if(dbpassword !== password){
       return res.status(400).json({error:true,message:'password is not correct'});
     }
-    const email : string= existingUser.email;
-    const accessToken = generateJWT({username,email});
-    console.log(accessToken)
-
-    return res.status(200).json({error:false,message:"Login Successfull",accessToken});
+    
+    const accessToken = generateJWT({username,email,role});
+    // const tokenDetials = getTokenDetails(accessToken);
+    res.setHeader('Set-Cookie', [
+      `token=${accessToken}; HttpOnly; Path=/; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
+      `loggedIn=true; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
+    ])
+    return res.status(200).json({error:false,accessToken,username});
 
 
   }catch(e){
