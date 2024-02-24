@@ -8,7 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
  
   switch(method){
     case 'GET':
-
+      connectDB()
+      return res.status(200).json({error:false, message: 'Connected to database' });
     case 'POST':
       try{
           const { username, age, email,role, password } = req.body;
