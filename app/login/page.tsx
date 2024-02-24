@@ -10,9 +10,9 @@ const Page = () => {
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault()
-    // Handle sign-in logic here
+    
   }
 
   return (
