@@ -17,9 +17,9 @@ const Page = () => {
   const [commitee, setCommitee] = useState('')
   const [passoutyear, setPassoutYear] = useState('')
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    axios.post('http://localhost:3000/api/users/register', {
+    await axios.post('http://localhost:3000/api/users/register', {
       email: email,
       username: username,
       age: 1,
