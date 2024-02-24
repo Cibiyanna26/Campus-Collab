@@ -1,4 +1,5 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, model } from 'mongoose';
+
 
 interface UserDocument extends Document {
   username: string;
@@ -11,7 +12,7 @@ interface UserDocument extends Document {
   password: string;
 }
 
-const UserSchema = new mongoose.Schema<UserDocument>(
+const UserSchema =new mongoose.Schema<UserDocument>(
   {
     username: { type: String, required: true },
     age: Number,
@@ -25,6 +26,5 @@ const UserSchema = new mongoose.Schema<UserDocument>(
   { timestamps: true }
 );
 
-const UserModel = mongoose.model<UserDocument>('User', UserSchema);
 
-export default UserModel;
+export default mongoose.models.UserCampus || mongoose.model<UserDocument>('UserCampus', UserSchema);
