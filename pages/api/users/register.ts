@@ -29,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (existingUser) {
       return res.status(400).json({error:true, message: 'Email address already exists.' });
     }
+    if(role !== 'Student') return res.status(400).json({error:true,message:'You are not allowed'})
 
     const newUser = new UserModel({
       username,
