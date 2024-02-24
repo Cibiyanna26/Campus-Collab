@@ -6,13 +6,31 @@ import styles from './addroom.module.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
-
-const page = () => {
+const Page = () => {
     const [hall, setHall] = useState('')
     const [hallid, setHallid] = useState('')
     const [details, setDetails] = useState('')
     const [floor, setFloor] = useState('')
+
+    const router = useRouter();
+    const checkUser = async () =>{
+      try{
+        const response = await axios.get('http://localhost:3000/api/CheckUser');
+        if(response.data.message.role === 'Student'){
+          router.push('/dashboard');
+        }
+      }
+      catch(error){
+        console.log(error);
+        router.push('/login');
+      }
+    }
+
+    useEffect(()=>{
+      checkUser();
+    })
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -88,5 +106,5 @@ const page = () => {
   )
 }
 
-export default page;
+export default Page;
 
