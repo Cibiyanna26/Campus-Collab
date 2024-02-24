@@ -1,7 +1,7 @@
 import mongoose, { Document, model } from 'mongoose';
 
 interface RoomDocument extends Document {
-    rooId: string;
+    roomId: string;
     roomName: string;
     roomFloor: string;
     buildingId: string;
@@ -9,7 +9,7 @@ interface RoomDocument extends Document {
 
 const RoomSchema = new mongoose.Schema<RoomDocument>(
     {
-        rooId: { type: String, required: true, unique: true},
+        roomId: { type: String, required: true, unique: true},
         roomName: { type: String, required: true},
         roomFloor: { type: String, required: true },
         buildingId: { type: String, required: true },

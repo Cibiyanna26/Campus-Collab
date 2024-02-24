@@ -2,11 +2,9 @@ import mongoose, { Document, model } from 'mongoose';
 
 interface BookingDocument extends Document {
     bookingId: string;
-    roomNumber: string;
+    roomId: string;
     buildingNumber: string;
-    bookingDate: string;
-    bookingStartTime: string;
-    bookingEndTime: string;
+    eventDate: string;
     bookingPurpose: string;
     bookingPerson: string;
 }
@@ -14,11 +12,9 @@ interface BookingDocument extends Document {
 const BookingSchema = new mongoose.Schema<BookingDocument>(
     {
         bookingId: { type: String, required: true, unique: true },
-        roomNumber: { type: String, required: true },
+        roomId: { type: String, required: true },
         buildingNumber: { type: String, required: true },
-        bookingDate: { type: String, required: true },
-        bookingStartTime: { type: String, required: true },
-        bookingEndTime: { type: String, required: true },
+        eventDate: { type: String, required: true },
         bookingPurpose: { type: String, required: true },
         bookingPerson: { type: String, required: true },
     },
