@@ -22,6 +22,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     return res.status(401).json({ error: true, message: "Unauthorized" });
                 }
                 try{
+                    const {roomId,roomName,roomFloor,roomDetails} = req.body;
+                    if(!roomId || !roomName || !roomFloor || !roomDetails){
+                        return res.status(401).json({error:true,message:"All Field Are Mandatory"});
+                    }
                     const room = await roomModel.findOne({roomId: req.body.roomId});
                     if(room){
                         return res.status(400).json({error: true, message: "Room already exists" });
