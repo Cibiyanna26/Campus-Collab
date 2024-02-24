@@ -3,16 +3,30 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import styles from './login.module.css'
-
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
 
-  const handleSubmit = (e: any) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    
+    const response = await axios.post('http://localhost:3000/api/users/login', 
+      { 
+        username: email, 
+        password
+      },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+      )
+    if(response){
+      router.push('/dashboard');
+    }
   }
 
   return (
@@ -24,8 +38,8 @@ const Page = () => {
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="UserName"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={styles.input}

@@ -6,7 +6,7 @@ import styles from './signup.module.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
   const [email, setEmail] = useState('')
@@ -23,7 +23,7 @@ const Page = () => {
       email: email,
       username: username,
       age: 1,
-      role: 'student',
+      role: 'Student',
       password: password,
       departmentOfStudy: department,
       committeeBelonging: commitee,
@@ -35,7 +35,7 @@ const Page = () => {
         'Authorization': 'will be added later'
       }
     }).then((response) => {
-      console.log(response);
+      router.push('/login');
     }).catch((error) => {
       //add toast to display the error message
       toast.error(error.response.data.message);
@@ -43,6 +43,7 @@ const Page = () => {
       console.log(error.response.data.message);
     })
   }
+  const router = useRouter();
 
   const handleOptionChange = (event: any) => {
     setDepartment(event.target.value);
