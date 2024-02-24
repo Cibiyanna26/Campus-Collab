@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // const salt = await bcrypt.genSalt(10);
     // const hashedPassword = await bcrypt.hash(password, salt);
 
-    const existingUser = await UserModel.findOne({ email }).exec();
+    const existingUser = await UserModel.findOne({$or:[{ username },{ email }]}).exec();
 
     if (existingUser) {
       return res.status(400).json({error:true, message: 'Email address already exists.' });
