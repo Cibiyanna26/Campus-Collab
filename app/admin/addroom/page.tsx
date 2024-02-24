@@ -28,6 +28,7 @@ const page = () => {
       }
     }).then((response) => {
       console.log(response);
+      toast.success(response.data.message)
     }).catch((error) => {
       //add toast to display the error message
       toast.error(error.response.data.message);

@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         roomDetails: req.body.roomDetails
                     });
                     await newRoom.save();
-                    return res.status(200).json({ message: 'Room added successfully' });
+                    return res.status(200).json({rrror:false, message: 'Room added successfully' });
                 }
                 catch(err) {
                     return res.status(500).json({ error: true, message: "An error occured" });

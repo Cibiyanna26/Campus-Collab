@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
 const Page = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
 
@@ -15,18 +15,24 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const response = await axios.post('http://localhost:3000/api/users/login', 
+    const userUrl = 'http://localhost:3000/api/users/login';
+    const adminUrl = 'http://localhost:3000/api/admin/login';
+    
+    const response = await axios.post((rememberMe)?adminUrl:userUrl, 
       { 
-        username: email, 
+        username, 
         password
       },
       {
         headers: { 'Content-Type': 'application/json' }
       }
       )
-    if(response){
-      router.push('/dashboard');
-    }
+      if(response.data.role === 'Student'){
+        router.push('/dashboard');
+      }
+      if(response.data.role !== 'Student'){
+        router.push('/admin/dashboard');
+      }
   }
 
   return (
@@ -40,8 +46,8 @@ const Page = () => {
           <input
             type="text"
             placeholder="UserName"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className={styles.input}
           />
           <input
@@ -58,7 +64,7 @@ const Page = () => {
               onChange={() => setRememberMe(!rememberMe)}
               className={styles.checkbox}
             />
-            Remember Me
+            Admin Login
           </label>
           <button type="submit" className={styles.button}>
             SIGN IN

@@ -1,7 +1,19 @@
 'use client'
 
 import Link from "next/link";
-const BuildingBox = () =>{
+
+
+export interface BoxInterface {
+    room:{
+        roomId:string;
+        roomName:string;
+        roomFloor:string;
+        roomDetails:string;
+    }
+}
+
+const BuildingBox = (props : BoxInterface) =>{
+    const {room} = props;
     return(
         <>  
         <Link href="/login">
@@ -10,9 +22,9 @@ const BuildingBox = () =>{
                     <img src={"https://avatars.githubusercontent.com/u/121782238?v=4"} className="w-[7rem] h-[7rem] mx-auto"></img>
                 </div>
                 <div>
-                    <h1>Room Id : 1</h1>
-                    <p>Room Name : IT Center</p>
-                    <p>Building Name : CSE department</p>
+                    <h1>Room Id : {room.roomId}</h1>
+                    <p>Room Name : {room.roomName}</p>
+                    <p>roomFloor : {room.roomFloor}</p>
                 </div>
             </div>  
         </Link>

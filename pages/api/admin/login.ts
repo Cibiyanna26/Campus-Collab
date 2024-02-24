@@ -36,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               `loggedIn=true; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
               `role=${role};HttpOnly; Path=/; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`
             ])
-            return res.status(200).json({error:false,accessToken,username});
+            return res.status(200).json({error:false,accessToken,username,role});
         
         
           }catch(e){
