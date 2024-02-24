@@ -7,12 +7,25 @@ interface RoomDocument extends Document {
     bookingHour: any;
 }
 
+/*
+room -> id, name, details, 
+booking -> date, roomid, period , person
+
+[]
+
+1/1/24 , 2 , [0,0,0,1,0] , muruga
+1/1/24 , 2 , [0,0,0,0,1] , cibi
+
+2/1/24 , 3 , [1,0,0,0,00] , nithin
+
+1/1/24 , 2 , [0,0,0,1,0] , aswath
+*/
+
 const RoomBookSchema = new mongoose.Schema<RoomDocument>(
     {
         roomId: { type: String, required: true },
-        buildingId: { type: String, required: true },
         eventDate: { type: String, required: true },
-        bookingHour: [],
+        bookingHour: [0,0,0,0,0,0,0],
     },
     { timestamps: true }
 );

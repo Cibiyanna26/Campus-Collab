@@ -29,12 +29,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if(dbpassword !== password){
       return res.status(400).json({error:true,message:'password is not correct'});
     }
-    
+    if(role !== 'Student') return res.status(400).json({error:true,message:'You are not allowed'})
     const accessToken = generateJWT({username,email,role});
     // const tokenDetials = getTokenDetails(accessToken);
     res.setHeader('Set-Cookie', [
       `token=${accessToken}; HttpOnly; Path=/; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
       `loggedIn=true; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
+      `role=${role};HttpOnly; Path=/; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
     ])
     return res.status(200).json({error:false,accessToken,username});
 

@@ -4,7 +4,7 @@ interface RoomDocument extends Document {
     roomId: string;
     roomName: string;
     roomFloor: string;
-    buildingId: string;
+    roomDetails: string;
 }
 
 const RoomSchema = new mongoose.Schema<RoomDocument>(
@@ -12,7 +12,7 @@ const RoomSchema = new mongoose.Schema<RoomDocument>(
         roomId: { type: String, required: true, unique: true},
         roomName: { type: String, required: true},
         roomFloor: { type: String, required: true },
-        buildingId: { type: String, required: true },
+        roomDetails: { type: String, required: true }
     },
     { timestamps: true }
 );
