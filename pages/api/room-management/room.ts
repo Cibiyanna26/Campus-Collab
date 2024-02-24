@@ -25,6 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     return res.status(401).json({ error: true, message: "Unauthorized" });
                 }
                 try{
+                    const {roomId,roomName,roomFloor,roomDetails} = req.body;
+                    if(!roomId || !roomName || !roomFloor || !roomDetails){
+                        return res.status(401).json({error:true,message:"All Field Are Mandatory"});
+                    }
                     const room = await roomModel.findOne({roomId: req.body.roomId});
                     if(room){
                         return res.status(400).json({error: true, message: "Room already exists" });
@@ -36,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         roomDetails: req.body.roomDetails
                     });
                     await newRoom.save();
-                    return res.status(200).json({ message: 'Room added successfully' });
+                    return res.status(200).json({rrror:false, message: 'Room added successfully' });
                 }
                 catch(err) {
                     return res.status(500).json({ error: true, message: "An error occured" });
