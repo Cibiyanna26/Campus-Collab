@@ -40,7 +40,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       committeeBelonging,
       password: password,
     });
-
     await newUser.save();
     
     return res.status(201).send({error:false, message: 'User successfully registered!' });
