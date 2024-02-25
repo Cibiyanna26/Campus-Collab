@@ -127,7 +127,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                         <h1 className='font-bold'>1st Period</h1>
 
                         {
-                            (currentBook[0] === 1) ? <p>"Slot is booked"</p>
+                            (currentBook[0] === 1) ? <p>Slot is booked</p>
                             :
                             <>
                                 <p>Slot is Free</p>
@@ -139,7 +139,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                     <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[1]===1 ?'bg-green-400' : 'bg-gray-200'}  p-2`}>
                         <h1 className='font-bold'>2st Period</h1>
                         {
-                            (currentBook[1] === 1) ? <p>"Slot is booked"</p>
+                            (currentBook[1] === 1) ? <p>Slot is booked</p>
                             :
                             <>
                                 <p>Slot is Free</p>
@@ -150,7 +150,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                     <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[2]===1 ?'"bg-green-400' : 'bg-gray-200 '} p-2`}>
                         <h1 className='font-bold'>3st Period</h1>
                         {
-                            (currentBook[2] === 1) ? <p>"Slot is booked"</p>
+                            (currentBook[2] === 1) ? <p>Slot is booked</p>
                             :
                             <>
                                 <p>Slot is Free</p>
@@ -185,7 +185,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                     <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[5]===1 ? 'bg-green-400' :'bg-gray-200'} p-2`}>
                         <h1 className='font-bold'>6st Period</h1>
                         {
-                            (currentBook[5] === 1) ? <p>"Slot is booked"</p>
+                            (currentBook[5] === 1) ? <p>Slot is booked</p>
                             :
                             <>
                                 <p>Slot is Free</p>
@@ -197,7 +197,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                     <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[6]===1 ? 'bg-green-400' : 'bg-gray-200'} p-2 `}>
                         <h1 className='font-bold'>7st Period</h1>
                         {
-                            (currentBook[6] === 1) ? <p>"Slot is booked"</p>
+                            (currentBook[6] === 1) ? <p>Slot is booked</p>
                             :
                             <>
                                 <p>Slot is Free</p>
