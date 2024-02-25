@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { ToastContainer, toast } from 'react-toastify';
 import Booking from '@/components/Booking';
-
+const { HOSTED_URL} = process.env;
 function getTodayAndNext6Days() {
     const result = [];
     const today = new Date();
@@ -51,7 +51,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
 
     const getUserName =async () =>{
         try{
-            const response = await axios.get(`${process.env.HOSTED_URL}api/users`);
+            const response = await axios.get(`${HOSTED_URL}api/users`);
             setUserDetails(response.data.tokenDetials);
         }catch(e){
 
@@ -62,7 +62,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
  
     async function actDateBooks(year : number, month : number, day : number){
         try{
-            const response = await axios.get(`${process.env.HOSTED_URL}api/room-management/helper.booking`);
+            const response = await axios.get(`${HOSTED_URL}api/room-management/helper.booking`);
             const data = response.data.message;
             var newMonth ;
             if(month<10)newMonth = "0"+month;

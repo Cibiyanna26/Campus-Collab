@@ -5,13 +5,13 @@ import BuildingBox from '@/components/BuildingBox';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
+const { HOSTED_URL} = process.env;
 const Page = () => {
   const [rooms,setRoom] = useState([]);
   const router = useRouter();
   const checkUser = async () =>{
     try{
-      const response = await axios.get(`${process.env.HOSTED_URL}api/CheckUser`);
+      const response = await axios.get(`${HOSTED_URL}api/CheckUser`);
       if(response.data.message.role !== 'Student'){
         router.push('/admin/dashboard');
       }
@@ -31,7 +31,7 @@ const Page = () => {
 
   const getAllRooms = async () =>{
     try{
-      const response = await axios.get(`${process.env.HOSTED_URL}api/room-management/room`);
+      const response = await axios.get(`${HOSTED_URL}api/room-management/room`);
       setRoom(response.data.message)
     }
      catch(e : any){

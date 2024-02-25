@@ -6,7 +6,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
-
+const { HOSTED_URL} = process.env;
 const Page = () => {
     const [hall, setHall] = useState('')
     const [hallid, setHallid] = useState('')
@@ -16,7 +16,7 @@ const Page = () => {
     const router = useRouter();
     const checkUser = async () =>{
       try{
-        const response = await axios.get(`${process.env.HOSTED_URL}api/CheckUser`);
+        const response = await axios.get(`${HOSTED_URL}api/CheckUser`);
         if(response.data.message.role === 'Student'){
           router.push('/dashboard');
         }
@@ -33,7 +33,7 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    await axios.post(`${process.env.HOSTED_URL}api/room-management/room`, {
+    await axios.post(`${HOSTED_URL}api/room-management/room`, {
       roomName:hall,
       roomId:hallid,
       roomDetails:details,

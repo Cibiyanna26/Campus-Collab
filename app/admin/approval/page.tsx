@@ -7,7 +7,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from '@/app/admin/addroom/addroom.module.css'
 import 'react-toastify/dist/ReactToastify.css';
-
+const { HOSTED_URL} = process.env;
 const Page = () => {
   const [requestBook,setRequestBook] = useState([]);
   useEffect(()=>{
@@ -21,7 +21,7 @@ const Page = () => {
 
   async function addNewBooking(){
     try{
-      const response = await axios.get(`${process.env.HOSTED_URL}api/room-management/booking`);
+      const response = await axios.get(`${HOSTED_URL}api/room-management/booking`);
       // setRequestBook(response.data.message);
       const data = response.data.message;
       const nonbookarray = data.filter((d : any)=>{
@@ -49,7 +49,7 @@ const Page = () => {
 
                   async function approveRequest(){
                     try{
-                      const response = await axios.post(`${process.env.HOSTED_URL}api/room-management/approval`,
+                      const response = await axios.post(`${HOSTED_URL}api/room-management/approval`,
                       {
                         roomId:singleReq.roomId,
                         eventDate:singleReq.eventDate,
@@ -77,7 +77,7 @@ const Page = () => {
                   }
                   async function deleteRequest(){
                     try{
-                      const response = await axios.delete(`${process.env.HOSTED_URL}api/room-management/approval`,
+                      const response = await axios.delete(`${HOSTED_URL}api/room-management/approval`,
                       {
                         params: {
                           roomId: singleReq.roomId,

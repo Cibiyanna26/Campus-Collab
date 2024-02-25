@@ -15,6 +15,7 @@ interface BookingStruct {
     setShow:Function,
 }
 
+const {HOSTED_URL} = process.env;
 
 const Booking = (props : BookingStruct) => {
     const {roomId, eventDate, bookingPerson,period, setShow} = props;
@@ -26,7 +27,7 @@ const Booking = (props : BookingStruct) => {
 
     const array = [0,0,0,0,0,0,0];
     array[period] = 1;
-    await axios.post(`${process.env.HOSTED_URL}/room-management/booking`, {
+    await axios.post(`${HOSTED_URL}api/room-management/booking`, {
       roomId,
       eventDate,
       bookingHour:array,

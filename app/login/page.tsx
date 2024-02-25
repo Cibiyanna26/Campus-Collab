@@ -6,6 +6,9 @@ import styles from './login.module.css'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
+
+const {HOSTED_URL} = process.env;
+
 const Page = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -15,8 +18,8 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const userUrl = `${process.env.HOSTED_URL}api/users/login`;
-    const adminUrl = `${process.env.HOSTED_URL}api/admin/login`;
+    const userUrl = `${HOSTED_URL}api/users/login`;
+    const adminUrl = `${HOSTED_URL}api/admin/login`;
     
     const response = await axios.post((rememberMe)?adminUrl:userUrl, 
       { 
