@@ -50,7 +50,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
 
     const getUserName =async () =>{
         try{
-            const response = await axios.get(`${HOSTED_URL}/api/users`);
+            const response = await axios.get(`${HOSTED_URL}/api/users/`);
             setUserDetails(response.data.tokenDetials);
         }catch(e){
 
