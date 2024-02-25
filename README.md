@@ -58,3 +58,25 @@ Make sure you have the following installed on your machine:
    git clone https://github.com/Cibiyanna26/Pursuit-Pioneers-Web-1.git
 
 2. Navigate to the project directory:
+
+   ```bash
+   cd Pursuit-Pioneers-Web-1
+
+3. Install dependencies:
+   
+   ```bash
+   yarn install
+
+### Running the Application
+
+1. To build the project for production:
+
+      ```bash
+      yarn dev
+
+Visit http://localhost:3000 in your browser to view the application.
+
+
+
+
+   
