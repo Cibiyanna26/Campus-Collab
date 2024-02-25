@@ -40,7 +40,7 @@ const page = () => {
             {
                 approvedBooking && approvedBooking.map((booked : any)=>{
                     return<>
-                        <div className='p-4 bg-gray-200 rounded-xl border-2 border-gray-400 grid grid-cols-2 gap-4'>
+                        <div className='p-4 bg-gray-200 rounded-xl border-2 border-gray-400 grid grid-cols-2 gap-4 my-4'>
                             <p> <span className='font-semibold'>Booking Person :</span> {booked.bookingPerson}</p>
                             <p> <span className='font-semibold'>Room Id :</span> {booked.roomId}</p>
                             <p><span className='font-semibold'>Requesting Period :</span> {booked.bookingHour}</p>
