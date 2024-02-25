@@ -16,7 +16,7 @@ const Page = () => {
     const router = useRouter();
     const checkUser = async () =>{
       try{
-        const response = await axios.get('http://localhost:3000/api/CheckUser');
+        const response = await axios.get(`${process.env.HOSTED_URL}/CheckUser`);
         if(response.data.message.role === 'Student'){
           router.push('/dashboard');
         }
@@ -33,7 +33,7 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    await axios.post('http://localhost:3000/api/room-management/room', {
+    await axios.post(`${process.env.HOSTED_URL}/room-management/room`, {
       roomName:hall,
       roomId:hallid,
       roomDetails:details,

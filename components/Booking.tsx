@@ -26,7 +26,7 @@ const Booking = (props : BookingStruct) => {
 
     const array = [0,0,0,0,0,0,0];
     array[period] = 1;
-    await axios.post('http://localhost:3000/api/room-management/booking', {
+    await axios.post(`${process.env.HOSTED_URL}/room-management/booking`, {
       roomId,
       eventDate,
       bookingHour:array,

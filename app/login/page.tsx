@@ -15,8 +15,8 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const userUrl = 'http://localhost:3000/api/users/login';
-    const adminUrl = 'http://localhost:3000/api/admin/login';
+    const userUrl = `${process.env.HOSTED_URL}/users/login`;
+    const adminUrl = `${process.env.HOSTED_URL}/admin/login`;
     
     const response = await axios.post((rememberMe)?adminUrl:userUrl, 
       { 
@@ -39,7 +39,7 @@ const Page = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://sneat.com">CampusCollab!</a>
+          Welcome to <a href="">CampusCollab!</a>
         </h1>
 
         <form onSubmit={handleSubmit} className={styles.form}>
