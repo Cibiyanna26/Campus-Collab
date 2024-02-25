@@ -17,8 +17,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     switch (method) {
         case 'GET':
             try {
-                const data = await bookingModel.find({ eventDate: { $gte: currentDate } });
-                return res.status(200).json(data);
+                const data = await bookingModel.find({});
+                return res.status(200).json({error:false,message:data});
             } catch (err) {
                 console.log(err);
                 return res.status(500).json({ error: true, message: "An error occurred" });
@@ -34,6 +34,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     }
                     const filter = {eventDate: req.body.eventDate, roomId: req.body.roomId}
                     const booking = await roomBookModel.findOne(filter);
+
+                   
                     if(!booking){
                         const newBooking = new roomBookModel({
                             roomId: req.body.roomId,
@@ -55,11 +57,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                 allocatedTime[i] = 1;
                             }
                         }
-                        await roomBookModel.updateOne({roomId: req.body.roomId,eventDate: req.body.eventDate},{$set:{allocatedTime}},{new :true})
+                        console.log(booking)
+                        await roomBookModel.updateOne({roomId: req.body.roomId,eventDate: req.body.eventDate},{$set:{bookingHour:allocatedTime}},{new :true})
                     }
         
                     const newBooking = new bookingModel({
-                        bookingId: req.body.bookingId,
                         roomId: req.body.roomId,
                         eventDate: req.body.eventDate,
                         bookingPurpose: req.body.bookingPurpose,

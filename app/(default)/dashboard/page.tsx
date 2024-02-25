@@ -12,8 +12,14 @@ const page = () => {
   },[])
 
   const getAllRooms = async () =>{
+    try{
       const response = await axios.get('http://localhost:3000/api/room-management/room');
       setRoom(response.data.message)
+    }
+     catch(e : any){
+      console.log(e.response.data.message);
+     }
+
   }
   return (
     <div className='overflow-y-auto p-4'>
@@ -23,8 +29,8 @@ const page = () => {
         <main className='  border-gray-300 rounded-xl  border-2  p-4' >
           <div className='grid grid-cols-4 gap-y-4'>
             {
-                rooms  && rooms.map((room)=>{
-                    return  <BuildingBox room ={room}/>
+                rooms  && rooms.map((room,index)=>{
+                    return  <BuildingBox room ={room} key={index}/>
                 })
             }
           </div>
