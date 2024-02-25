@@ -39,7 +39,7 @@ const Page = () => {
   return (
     <>
         <div className=''>
-            <h1 className='text-2xl font-bold'>Requests Received</h1>
+            <h1 className='text-2xl font-bold p-4'>Requests Received</h1>
             <div className='p-4 rounded-xl flex flex-col gap-y-4'>
 
               {
