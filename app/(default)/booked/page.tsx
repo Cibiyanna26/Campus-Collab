@@ -41,7 +41,13 @@ const Page = () => {
                         <div className='p-4 bg-[#B4D4FF] rounded-xl  grid grid-cols-2 gap-4 my-4 shadow-xl hover:shadow-none duration-200 ease-in'>
                             <p> <span className='font-semibold'>Booking Person :</span> {booked.bookingPerson}</p>
                             <p> <span className='font-semibold'>Room Id :</span> {booked.roomId}</p>
-                            <p><span className='font-semibold'>Requesting Period :</span> {booked.bookingHour}</p>
+                            <p><span className='font-semibold'>Requesting Period :</span> {
+                              booked.bookingHour.map((hour:any, index:any)=>{
+                                return <span key={index}>{
+                                  (hour == 1) ? index+1: ''
+                                } </span>
+                              })
+                            }</p>
                             <p><span className='font-semibold'>Date :</span> {booked.eventDate} </p>
                             <p><span className='font-semibold'>Booking Details :</span> {booked.bookingPurpose}</p>
                             <p className='px-3 py-2 rounded-xl bg-[#427D9D] w-[7rem] text-white'>Booked</p>
