@@ -19,7 +19,7 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    await axios.post(`${process.env.HOSTED_URL}users/register`, {
+    await axios.post(`${process.env.HOSTED_URL}api/users/register`, {
       email: email,
       username: username,
       age: 1,

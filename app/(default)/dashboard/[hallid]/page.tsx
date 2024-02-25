@@ -51,7 +51,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
 
     const getUserName =async () =>{
         try{
-            const response = await axios.get(`${process.env.HOSTED_URL}/users`);
+            const response = await axios.get(`${process.env.HOSTED_URL}api/users`);
             setUserDetails(response.data.tokenDetials);
         }catch(e){
 
@@ -62,7 +62,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
  
     async function actDateBooks(year : number, month : number, day : number){
         try{
-            const response = await axios.get(`${process.env.HOSTED_URL}/room-management/helper.booking`);
+            const response = await axios.get(`${process.env.HOSTED_URL}api/room-management/helper.booking`);
             const data = response.data.message;
             var newMonth ;
             if(month<10)newMonth = "0"+month;
