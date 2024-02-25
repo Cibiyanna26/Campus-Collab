@@ -33,7 +33,7 @@ const Page = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    await axios.post(`${HOSTED_URL/}api/room-management/room`, {
+    await axios.post(`${HOSTED_URL}api/room-management/room`, {
       roomName:hall,
       roomId:hallid,
       roomDetails:details,

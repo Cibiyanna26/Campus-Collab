@@ -19,6 +19,7 @@ const Page = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     const userUrl = `${HOSTED_URL}/api/users/login`;
+    console.log(HOSTED_URL)
     const adminUrl = `${HOSTED_URL}/api/admin/login`;
     
     const response = await axios.post((rememberMe)?adminUrl:userUrl, 
