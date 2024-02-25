@@ -93,13 +93,22 @@ const Page = ({params}:{params:{hallid:string}}) => {
             setShow(true);
         }
 
+        const [dateHelper , setDateHelper] = useState(0);
+    
+        useEffect(()=>{
+            actDateBooks(dateMon[dateHelper][2],dateMon[dateHelper][1],dateMon[dateHelper][0])
+        })
+        // [dateHelper,actDateBooks,dateMon]
+
   return (
         <div className='relative'>
             {
                 (show) ? 
-                <div className='absolute z-50 bg-white flex justify-center items-center'>
-                    <Booking roomId={roomId} eventDate={eventDate} 
-                    bookingPerson={bookingPerson} period={period} setShow={setShow}/>
+                <div className='w-full h-full flex justify-center'>
+                    <div className='absolute z-50 flex justify-center items-center'>
+                        <Booking roomId={roomId} eventDate={eventDate} 
+                        bookingPerson={bookingPerson} period={period} setShow={setShow}/>
+                    </div>
                 </div>
                 :
                 <></>
@@ -108,13 +117,13 @@ const Page = ({params}:{params:{hallid:string}}) => {
           
           <div className=''>
              <div className='flex flex-row justify-around'>
-                <button onClick={()=>{actDateBooks(dateMon[0][2],dateMon[0][1],dateMon[0][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-2 w-[3rem] rounded-xl' >{dateMon[0][0]}</button>
-                <button onClick={()=>{actDateBooks(dateMon[1][2],dateMon[1][1],dateMon[1][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[1][0]}</button>
-                <button onClick={()=>{actDateBooks(dateMon[2][2],dateMon[2][1],dateMon[2][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[2][0]}</button>
-                <button onClick={()=>{actDateBooks(dateMon[3][2],dateMon[3][1],dateMon[3][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[3][0]}</button>
-                <button onClick={()=>{actDateBooks(dateMon[4][2],dateMon[4][1],dateMon[4][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[4][0]}</button>
-                <button onClick={()=>{actDateBooks(dateMon[5][2],dateMon[5][1],dateMon[5][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[5][0]}</button>
-                <button onClick={()=>{actDateBooks(dateMon[6][2],dateMon[6][1],dateMon[6][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[6][0]}</button>
+                <button onClick={()=>{setDateHelper(0)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-2 w-[3rem] rounded-xl' >{dateMon[0][0]}</button>
+                <button onClick={()=>{setDateHelper(1)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[1][0]}</button>
+                <button onClick={()=>{setDateHelper(2)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[2][0]}</button>
+                <button onClick={()=>{setDateHelper(3)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[3][0]}</button>
+                <button onClick={()=>{setDateHelper(4)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[4][0]}</button>
+                <button onClick={()=>{setDateHelper(5)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[5][0]}</button>
+                <button onClick={()=>{setDateHelper(6)}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 w-[3rem] rounded-xl'>{dateMon[6][0]}</button>
              </div>
              <div className='p-4'>
                 <div className="text-center">

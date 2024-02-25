@@ -48,7 +48,7 @@ const Booking = (props : BookingStruct) => {
 
   return (
     <>
-          <div className=' rounded-xl border-2 border-[#DDF2FD] relative'>
+          <div className=' rounded-xl border-2 border-[#DDF2FD] relative bg-white'>
             <button onClick={()=>setShow(false)} className='absolute top-4 right-4 rounded-xl text-xl font-semibold'>
                 X
             </button>
