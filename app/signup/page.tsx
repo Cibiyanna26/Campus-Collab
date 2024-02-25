@@ -120,8 +120,8 @@ const Page = () => {
 
         <p className={styles.text}>
           New on our platform?{' '}
-          <a href="/signup" className={styles.link}>
-            Create an account
+          <a href="/login" className={styles.link}>
+            Already have an account
           </a>
         </p>
         <p className={styles.text}>

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import teaching from '@/assets/teaching.jpg'
+import Image from 'next/image';
 export interface BoxInterface {
     room:{
         roomId:string;
@@ -40,7 +42,7 @@ const BuildingBox = (props : BoxInterface) =>{
                 <Link href={`/dashboard/${room.roomId}`} >
                     <div className="w-[80%] mx-auto h-[15rem] rounded-xl p-3 justify-between flex flex-col gap-y-2 bg-[#427D9D] text-white shadow-xl hover:shadow-none duration-200 ease">
                         <div className="rounded-xl w-full h-[8rem] overflow-hidden">
-                            <img src={"https://ibb.co/rQxzccb"} className="w-full h-full "></img>
+                            <Image src={teaching} className="w-full h-full "  alt="Description of the image"></Image>
                         </div>
                         <div className="grid grid-cols-2 ">
                             <p> <span className="font-semibold">Room Id </span> </p>
@@ -57,7 +59,7 @@ const BuildingBox = (props : BoxInterface) =>{
             <>
                     <div className="w-[80%] mx-auto h-[15rem] rounded-xl p-3 justify-between flex flex-col gap-y-2 bg-[#427D9D] text-white shadow-xl hover:shadow-none duration-200 ease">
                         <div className="rounded-xl w-full h-[8rem] overflow-hidden">
-                            <img src={"https://ibb.co/rQxzccb"} className="w-full h-full "></img>
+                            <Image src={teaching} className="w-full h-full " alt="Description of the image"></Image>
                         </div>
                         <div className="grid grid-cols-2 ">
                             <p> <span className="font-semibold">Room Id </span> </p>

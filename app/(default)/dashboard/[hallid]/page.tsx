@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { ToastContainer, toast } from 'react-toastify';
 import Booking from '@/components/Booking';
-
+import Image from 'next/image';
 const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 
 function getTodayAndNext6Days() {
@@ -155,7 +155,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                             </>
                          }
                     </div>
-                    <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[2]===1 ?'"bg-green-400' : 'bg-[#DDF2FD]  '} p-4 shadow-xl hover:shadow-none duration-200 ease-in`}>
+                    <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[2]===1 ?'bg-green-400' : 'bg-[#DDF2FD]  '} p-4 shadow-xl hover:shadow-none duration-200 ease-in`}>
                         <h1 className='font-bold'>3st Period</h1>
                         {
                             (currentBook[2] === 1) ? <p>Slot is booked</p>
