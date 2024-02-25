@@ -40,15 +40,21 @@ const Page = () => {
 
 
   return (
-        <div className='grid grid-cols-4 gap-y-4'>
+    <>
+      <div className='p-4'>
+        <h1 className='text-2xl font-semibold'>Halls Available</h1>
+      </div>
+      <div className='grid grid-cols-4 gap-y-4'>
          
-            {
-                rooms  && rooms.map((room, index)=>{
-                    return  <BuildingBox room ={room} key={index}/>
-                })
-            }
+         {
+             rooms  && rooms.map((room, index)=>{
+                 return  <BuildingBox room ={room} key={index}/>
+             })
+         }
+     
+      </div>
+    </>
         
-         </div>
   )
 }
 
