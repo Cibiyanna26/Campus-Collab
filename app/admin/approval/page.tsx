@@ -1,5 +1,6 @@
 'use client'
 
+
 import React, { useEffect, useState } from 'react'
 import BuildingBox from '@/components/BuildingBox';
 import axios from 'axios';
@@ -126,4 +127,4 @@ const page = () => {
   )
 }
 
-export default page;
+export default Page;
