@@ -12,7 +12,7 @@ const Page = () => {
     const router = useRouter();
   const checkUser = async () =>{
     try{
-      const response = await axios.get(`${HOSTED_URL}api/CheckUser`);
+      const response = await axios.get(`${HOSTED_URL}/api/CheckUser`);
       if(response.data.message.role === 'Student'){
         router.push('/dashboard');
       }
@@ -30,7 +30,7 @@ const Page = () => {
     })
 
     const getAllRooms = async () =>{
-        const response = await axios.get(`${HOSTED_URL}api/room-management/room`);
+        const response = await axios.get(`${HOSTED_URL}/api/room-management/room`);
         setRoom(response.data.message)
     }
 
