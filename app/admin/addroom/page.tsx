@@ -1,14 +1,13 @@
 'use client'
-import BuildingBox from '@/components/BuildingBox';
+
 import { useState, useEffect } from 'react'
-import React from 'react'
 import styles from './addroom.module.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 
-const Page = () => {
+const page = () => {
     const [hall, setHall] = useState('')
     const [hallid, setHallid] = useState('')
     const [details, setDetails] = useState('')
@@ -106,5 +105,5 @@ const Page = () => {
   )
 }
 
-export default Page;
+export default page;
 
