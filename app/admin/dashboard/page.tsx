@@ -26,7 +26,7 @@ const Page = () => {
     useEffect(()=>{
         getAllRooms();
         checkUser();
-    })
+    },[])
 
     const getAllRooms = async () =>{
         const response = await axios.get(`${HOSTED_URL}/api/room-management/room`);
