@@ -6,6 +6,7 @@ interface BookingDocument extends Document {
     bookingPurpose: string;
     bookingPerson: string;
     bookingHour: any;
+    approval:string;
 }
 
 const BookingSchema = new mongoose.Schema<BookingDocument>(
@@ -14,7 +15,8 @@ const BookingSchema = new mongoose.Schema<BookingDocument>(
         eventDate: { type: String, required: true },
         bookingPurpose: { type: String, required: true },
         bookingPerson: { type: String, required: true },
-        bookingHour: [0,0,0,0,0,0,0]
+        bookingHour: [0,0,0,0,0,0,0],
+        approval:{type:String,default:"Pending"}
     },
     { timestamps: true }
 );

@@ -1,11 +1,11 @@
 'use client'
 
-import React from 'react'
-import BuildingBox from '@/components/BuildingBox';
+
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { ToastContainer, toast } from 'react-toastify';
+import Booking from '@/components/Booking';
 
 function getTodayAndNext6Days() {
     const result = [];
@@ -32,11 +32,33 @@ const page = ({params}:{params:{hallid:string}}) => {
   const [rooms,setRoom] = useState([]);
     const [dateMon,setDateMon]=useState([[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]);
     const [currentBook,setCurrentBook] = useState([0,0,0,0,0,0,0]);
+    const [userDetails,setUserDetails] = useState({
+        "username": "",
+        "email": "",
+        "role": "",
+    });
+    const [date,setDate] = useState('');
   useEffect(()=>{
     const arrayData = getTodayAndNext6Days();
     setDateMon(arrayData)
+    getUserName();
   },[])
-  const [date,setDate] = useState('');
+
+  useEffect(()=>{
+    console.log(userDetails)
+  },[userDetails])
+
+  const getUserName =async () =>{
+    try{
+        const response = await axios.get('http://localhost:3000/api/users');
+        setUserDetails(response.data.tokenDetials);
+    }catch(e){
+
+    }
+  }
+
+
+ 
   async function actDateBooks(year : number, month : number, day : number){
     try{
         const response = await axios.get('http://localhost:3000/api/room-management/helper.booking');
@@ -52,7 +74,7 @@ const page = ({params}:{params:{hallid:string}}) => {
             if(d.roomId === params.hallid && d.eventDate === clickDate)return true;
             return false;
         })
-        if(filterData.length ===0 ){
+        if(filterData.length === 0 ){
             setCurrentBook([0,0,0,0,0,0,0])
         }else{
             setCurrentBook(filterData[0].bookingHour)
@@ -64,29 +86,53 @@ const page = ({params}:{params:{hallid:string}}) => {
   }
 
 
-  async function BookHall(period:number){
-    const himArray = [0,0,0,0,0,0,0];
-    himArray[period] =1;
-    try{
-        const Booking = {
-            roomId: params.hallid,
-            eventDate: date,
-            bookingPurpose: "The free day",
-            bookingHour: himArray,
-            bookingPerson: "root"
-        }
-        const response = await axios.post('http://localhost:3000/api/room-management/booking',Booking,{
-            headers: { 'Content-Type': 'application/json' }
-          }
-        )
-        toast.success(response.data.message)
-    }catch(e : any){
-        toast.error(e.response.data.message)
+//   async function BookHall(period:number){
+//     const himArray = [0,0,0,0,0,0,0];
+//     himArray[period] =1;
+//     try{
+//         const Booking = {
+//             roomId: params.hallid,
+//             eventDate: date,
+//             bookingPurpose: "The free day",
+//             bookingHour: himArray,
+//             bookingPerson: "root"
+//         }
+//         const response = await axios.post('http://localhost:3000/api/room-management/booking',Booking,{
+//             headers: { 'Content-Type': 'application/json' }
+//           }
+//         )
+//         toast.success(response.data.message)
+//     }catch(e : any){
+//         toast.error(e.response.data.message)
+//     }
+//   }
+
+    const [roomId, setRoomId] = useState('')
+    const [eventDate, setEventDate] = useState('')
+    const [bookingPerson,setBookingPerson] = useState('');
+    const [period,setPeriod] = useState(-1);
+    const [show,setShow] = useState(false);
+    function onClickBook(period : number){
+        setPeriod(period);
+        setRoomId(params.hallid);
+        setBookingPerson(userDetails.username);
+        setEventDate(date)
+        setShow(true);
     }
-  }
 
   return (
-
+        <div className='relative'>
+            {
+                (show) ? 
+                <div className='absolute z-50 bg-white flex justify-center items-center'>
+                    <Booking roomId={roomId} eventDate={eventDate} 
+                    bookingPerson={bookingPerson} period={period} setShow={setShow}/>
+                </div>
+                :
+                <></>
+            }
+        
+          
           <div className=''>
              <div className='flex flex-row justify-around'>
                 <button onClick={()=>{actDateBooks(dateMon[0][2],dateMon[0][1],dateMon[0][0])}} className='border-b-4 border-gray-400 hover:border-gray-800 p-1 rounded-xl' >{dateMon[0][0]}</button>
@@ -111,7 +157,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(0)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(0)} type='submit'>Book Now</button>
                             </>
                          }
                         
@@ -123,7 +169,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(1)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(1)} type='submit'>Book Now</button>
                             </>
                          }
                     </div>
@@ -134,7 +180,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(2)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(2)} type='submit'>Book Now</button>
                             </>
                          }
                     </div>
@@ -145,7 +191,8 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(3)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(3)} type='submit'>Book Now</button>
+                                
                             </>
                          }
                     </div>
@@ -156,7 +203,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(4)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(4)} type='submit'>Book Now</button>
                             </>
                          }
 
@@ -168,7 +215,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(5)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(5)} type='submit'>Book Now</button>
                             </>
                          }
 
@@ -180,7 +227,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                             :
                             <>
                                 <p>Slot is Free</p>
-                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>BookHall(6)} type='submit'>Book Now</button>
+                                <button className='bg-orange-400 p-3 rounded-xl mt-4' onClick={()=>onClickBook(6)} type='submit'>Book Now</button>
                             </>
                          }
 
@@ -188,6 +235,7 @@ const page = ({params}:{params:{hallid:string}}) => {
                 </div>
                 <ToastContainer />
              </div>
+          </div>
           </div>
   )
 }
