@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import styles from '@/app/admin/addroom/addroom.module.css'
 import 'react-toastify/dist/ReactToastify.css';
 
-const page = () => {
+const Page = () => {
   const [requestBook,setRequestBook] = useState([]);
   useEffect(()=>{
     addNewBooking();
@@ -127,4 +127,4 @@ const page = () => {
   )
 }
 
-export default page;
+export default Page;

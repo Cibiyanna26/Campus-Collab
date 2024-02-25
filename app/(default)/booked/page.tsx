@@ -1,10 +1,9 @@
 'use client'
 
 import React from 'react'
-import BuildingBox from '@/components/BuildingBox';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-const page = () => {
+const Page = () => {
 
     const [approvedBooking,setApprovedBookings] = useState([]);
 
@@ -62,4 +61,4 @@ const page = () => {
   )
 }
 
-export default page;
+export default Page;

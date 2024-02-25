@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 
-const page = () => {
+const Page = () => {
     const [hall, setHall] = useState('')
     const [hallid, setHallid] = useState('')
     const [details, setDetails] = useState('')
@@ -105,5 +105,5 @@ const page = () => {
   )
 }
 
-export default page;
+export default Page;
 

@@ -28,7 +28,7 @@ function getTodayAndNext6Days() {
   }
   
 
-const page = ({params}:{params:{hallid:string}}) => {
+const Page = ({params}:{params:{hallid:string}}) => {
   const [rooms,setRoom] = useState([]);
     const [dateMon,setDateMon]=useState([[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]);
     const [currentBook,setCurrentBook] = useState([0,0,0,0,0,0,0]);
@@ -37,88 +37,62 @@ const page = ({params}:{params:{hallid:string}}) => {
         "email": "",
         "role": "",
     });
-    const [date,setDate] = useState('');
-  useEffect(()=>{
-    const arrayData = getTodayAndNext6Days();
-    setDateMon(arrayData)
-    getUserName();
-  },[])
-
-  useEffect(()=>{
-    console.log(userDetails)
-  },[userDetails])
-
-  const getUserName =async () =>{
-    try{
-        const response = await axios.get('http://localhost:3000/api/users');
-        setUserDetails(response.data.tokenDetials);
-    }catch(e){
-
-    }
-  }
-
-
- 
-  async function actDateBooks(year : number, month : number, day : number){
-    try{
-        const response = await axios.get('http://localhost:3000/api/room-management/helper.booking');
-        const data = response.data.message;
-        var newMonth ;
-        if(month<10)newMonth = "0"+month;
-        else newMonth = month;
-        const clickDate = year+'-'+newMonth+'-'+day
-        setDate(clickDate)
-        console.log(data);
-        console.log(clickDate)
-        const filterData = data.filter((d : any)=>{
-            if(d.roomId === params.hallid && d.eventDate === clickDate)return true;
-            return false;
-        })
-        if(filterData.length === 0 ){
-            setCurrentBook([0,0,0,0,0,0,0])
-        }else{
-            setCurrentBook(filterData[0].bookingHour)
-        }
-       
-    }catch(e){
-
-    }
-  }
-
-
-//   async function BookHall(period:number){
-//     const himArray = [0,0,0,0,0,0,0];
-//     himArray[period] =1;
-//     try{
-//         const Booking = {
-//             roomId: params.hallid,
-//             eventDate: date,
-//             bookingPurpose: "The free day",
-//             bookingHour: himArray,
-//             bookingPerson: "root"
-//         }
-//         const response = await axios.post('http://localhost:3000/api/room-management/booking',Booking,{
-//             headers: { 'Content-Type': 'application/json' }
-//           }
-//         )
-//         toast.success(response.data.message)
-//     }catch(e : any){
-//         toast.error(e.response.data.message)
-//     }
-//   }
-
     const [roomId, setRoomId] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [bookingPerson,setBookingPerson] = useState('');
     const [period,setPeriod] = useState(-1);
     const [show,setShow] = useState(false);
-    function onClickBook(period : number){
-        setPeriod(period);
-        setRoomId(params.hallid);
-        setBookingPerson(userDetails.username);
-        setEventDate(date)
-        setShow(true);
+    const [date,setDate] = useState('');
+    useEffect(()=>{
+        const arrayData = getTodayAndNext6Days();
+        setDateMon(arrayData)
+        getUserName();
+    },[])
+
+    const getUserName =async () =>{
+        try{
+            const response = await axios.get('http://localhost:3000/api/users');
+            setUserDetails(response.data.tokenDetials);
+        }catch(e){
+
+        }
     }
+
+
+ 
+    async function actDateBooks(year : number, month : number, day : number){
+        try{
+            const response = await axios.get('http://localhost:3000/api/room-management/helper.booking');
+            const data = response.data.message;
+            var newMonth ;
+            if(month<10)newMonth = "0"+month;
+            else newMonth = month;
+            const clickDate = year+'-'+newMonth+'-'+day
+            setDate(clickDate)
+            console.log(data);
+            console.log(clickDate)
+            const filterData = data.filter((d : any)=>{
+                if(d.roomId === params.hallid && d.eventDate === clickDate)return true;
+                return false;
+            })
+            if(filterData.length === 0 ){
+                setCurrentBook([0,0,0,0,0,0,0])
+            }else{
+                setCurrentBook(filterData[0].bookingHour)
+            }
+        
+        }catch(e){
+
+        }
+    }
+    
+        function onClickBook(period : number){
+            setPeriod(period);
+            setRoomId(params.hallid);
+            setBookingPerson(userDetails.username);
+            setEventDate(date)
+            setShow(true);
+        }
 
   return (
         <div className='relative'>
@@ -240,4 +214,4 @@ const page = ({params}:{params:{hallid:string}}) => {
   )
 }
 
-export default page;
+export default Page;
