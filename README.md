@@ -34,3 +34,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Pursuit Pioneers Web
+
+Welcome to the Pursuit Pioneers Web project repository! This project is built using Next.js and manages dependencies with Yarn.
+
+## Getting Started
+
+These instructions will help you set up and run the project on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (version >= 14.0.0)
+- [Yarn](https://yarnpkg.com/)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Cibiyanna26/Pursuit-Pioneers-Web-1.git
+
+2. Navigate to the project directory:
