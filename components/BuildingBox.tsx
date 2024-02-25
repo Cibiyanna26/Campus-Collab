@@ -19,7 +19,7 @@ const BuildingBox = (props : BoxInterface) =>{
         <Link href={`/dashboard/${room.roomId}`}>
             <div className="w-[80%] mx-auto h-[15rem] rounded-xl border-2 border-gray-300 p-3 flex flex-col gap-y-2">
                 <div className="">
-                    <img src={"https://avatars.githubusercontent.com/u/121782238?v=4"} className="w-[7rem] h-[7rem] mx-auto"></img>
+                    <img src={"https://ibb.co/rQxzccb"} className="w-[7rem] h-[7rem] mx-auto"></img>
                 </div>
                 <div>
                     <h1>Room Id : {room.roomId}</h1>
