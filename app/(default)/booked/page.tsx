@@ -3,7 +3,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-const { HOSTED_URL} = process.env;
+const HOSTED_URL = process.env.HOSTED_URL as string;
 const Page = () => {
 
     const [approvedBooking,setApprovedBookings] = useState([]);
