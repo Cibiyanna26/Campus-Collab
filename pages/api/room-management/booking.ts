@@ -28,49 +28,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 const token = req.cookies.token as string;
                 const tokenDetials = userDetailsFromToken(token) as UserPayload;
                 try{
-                    const room = await roomModel.findOne({roomId: req.body.roomId});
+                    const {roomId,eventDate,bookingPurpose,bookingHour,bookingPerson} = req.body;
+                    const room = await roomModel.findOne({roomId});
                     if(!room){
                         return res.status(404).json({error:true,message:'Please enter a valid room id'})
                     }
-                    const filter = {eventDate: req.body.eventDate, roomId: req.body.roomId}
-                    const booking = await roomBookModel.findOne(filter);
+                    
 
-                   
-                    if(!booking){
-                        const newBooking = new roomBookModel({
-                            roomId: req.body.roomId,
-                            eventDate: req.body.eventDate,
-                            bookingHour: req.body.bookingHour
-                        });
-                        await newBooking.save();
-                    }
-                    else{
-                        const allocatedTime = booking.bookingHour;
-                        const userRequestTime = req.body.bookingHour;
-                        
-                        for(var i = 0;i<7;i++){
-                            if((allocatedTime[i]===0 && userRequestTime[i]===0)|| (allocatedTime[i]!==userRequestTime[i]) )continue;
-                            else return res.status(401).json({error:true,message:'Rooms have been already books'})
-                        }
-                        for(var i =0;i<7;i++){
-                            if(userRequestTime[i]===1){
-                                allocatedTime[i] = 1;
-                            }
-                        }
-                        console.log(booking)
-                        await roomBookModel.updateOne({roomId: req.body.roomId,eventDate: req.body.eventDate},{$set:{bookingHour:allocatedTime}},{new :true})
+                    if(!roomId || !eventDate || !bookingHour || !bookingHour || !bookingPerson){
+                        return res.status(401).json({error:true,message:"Enter All Fields"})
                     }
         
+                    const findDuplicateBooking = await bookingModel.find({eventDate: req.body.eventDate,roomId:req.body.roomId,bookingHour:req.body.bookingHour , bookingPerson:req.body.bookingPerson})
+                    if(findDuplicateBooking.length>0){
+                        return res.status(401).json({error:true,message:"Booking Submitted Already"});
+                    }
+
                     const newBooking = new bookingModel({
-                        roomId: req.body.roomId,
-                        eventDate: req.body.eventDate,
-                        bookingPurpose: req.body.bookingPurpose,
-                        bookingHour: req.body.bookingHour,
-                        bookingPerson: req.body.bookingPerson
+                        roomId,
+                        eventDate,
+                        bookingPurpose,
+                        bookingHour,
+                        bookingPerson,
+                        approval:'Pending',
                     });
                     await newBooking.save();
 
-                    return res.status(200).json({error:false, message: 'Booking added successfully' });
+                    return res.status(200).json({error:false, message: 'Booking added successfully Wait for admin approval' });
                 }
                 catch(err: any){
                     return res.status(500).json({ error: true, message: err.message });

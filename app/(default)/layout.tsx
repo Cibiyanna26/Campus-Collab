@@ -12,7 +12,7 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
                  
                   <div className="flex flex-col gap-y-4 mt-8">
                     <Link href="/dashboard" className="text-left p-2 font-semibold">Dashboard</Link>
-                    <Link  href="/profile"className="text-left p-2 font-semibold">Profile</Link>
+                    <Link  href="/booked"className="text-left p-2 font-semibold">Booked</Link>
                   </div>
               </div>
           </div>
