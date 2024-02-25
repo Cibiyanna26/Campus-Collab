@@ -24,8 +24,8 @@ const Page = () => {
 
 
     useEffect(()=>{
-        checkUser();
         getAllRooms();
+        checkUser();
     })
 
     const getAllRooms = async () =>{

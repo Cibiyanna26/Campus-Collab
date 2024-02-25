@@ -23,10 +23,10 @@ const Page = () => {
   }
 
   useEffect(()=>{
-      async ()=>{
-        checkUser();
-      }
-      getAllRooms();
+      getAllRooms()
+
+      checkUser();
+      
   })
 
   const getAllRooms = async () =>{
