@@ -15,14 +15,12 @@ const Page = () => {
   const getAllRooms = async () =>{
     try{
       const response = await axios.get(`${HOSTED_URL}/api/room-management/booking`);
-      console.log(response)
         const approved = response.data.message.filter((d : any)=>{
             if(d.approval === 'Approved'){
                 return true;
             }
             return false;
         })
-        console.log(approved);
         setApprovedBookings(approved);
     }
      catch(e : any){

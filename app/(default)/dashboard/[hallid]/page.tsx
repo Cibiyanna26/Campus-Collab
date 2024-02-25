@@ -10,7 +10,6 @@ const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 function getTodayAndNext6Days() {
     const result = [];
     const today = new Date();
-    console.log(today);
 
     for (let i = 0; i < 7; i++) {
       const nextDay = new Date(today);
@@ -69,8 +68,6 @@ const Page = ({params}:{params:{hallid:string}}) => {
             else newMonth = month;
             const clickDate = year+'-'+newMonth+'-'+day
             setDate(clickDate)
-            console.log(data);
-            console.log(clickDate)
             const filterData = data.filter((d : any)=>{
                 if(d.roomId === params.hallid && d.eventDate === clickDate)return true;
                 return false;

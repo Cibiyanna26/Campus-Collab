@@ -39,8 +39,7 @@ const Page = () => {
     }).catch((error) => {
       //add toast to display the error message
       toast.error(error.response.data.message);
-      
-      console.log(error.response.data.message);
+    
     })
   }
   const router = useRouter();

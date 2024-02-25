@@ -14,9 +14,7 @@ const Page = () => {
     addNewBooking();
   },[])
 
-  useEffect(()=>{
-    console.log(requestBook)
-  },[requestBook])
+
 
 
   async function addNewBooking(){

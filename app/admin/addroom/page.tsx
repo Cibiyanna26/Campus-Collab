@@ -6,7 +6,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
-const HOSTED_URL = process.env.HOSTED_URL as string;
+const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 const Page = () => {
     const [hall, setHall] = useState('')
     const [hallid, setHallid] = useState('')
@@ -22,7 +22,7 @@ const Page = () => {
         }
       }
       catch(error){
-        console.log(error);
+
         router.push('/login');
       }
     }
@@ -44,13 +44,12 @@ const Page = () => {
         'Content-Type': 'application/json',
       }
     }).then((response) => {
-      console.log(response);
+
       toast.success(response.data.message)
     }).catch((error) => {
       //add toast to display the error message
       toast.error(error.response.data.message);
-      
-      console.log(error.response.data.message);
+  
     })
   }
 

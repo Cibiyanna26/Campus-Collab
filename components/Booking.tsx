@@ -39,13 +39,10 @@ const Booking = (props : BookingStruct) => {
         'Content-Type': 'application/json',
       }
     }).then((response) => {
-      console.log(response);
       toast.success(response.data.message)
     }).catch((error) => {
       //add toast to display the error message
       toast.error(error.response.data.message);
-      
-      console.log(error.response.data.message);
     })
   }
 
