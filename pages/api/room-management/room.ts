@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 }
 
             })
-            break;
+            return;
         case "POST":
             await authenticateMiddleware(req,res, async()=>{
                 const token = req.cookies.token as string;
@@ -47,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     return res.status(500).json({ error: true, message: "An error occured" });
                 }
             })
-            break;
+            return;
         default:
             return res.status(405).end(`Method ${method} Not Allowed`);
     }
