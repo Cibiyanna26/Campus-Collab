@@ -1,19 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import UserModel from '@/models/userModel';
 import { generateJWT, getTokenDetails } from '@/service/user.service';
+import { error } from 'console';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Your logic here
   const method = req.method;
   
   if (method !== 'POST') {
-    return res.status(405).send({ message: 'Only POST requests allowed.' });
+    return res.status(405).send({ error: true, message: 'Only POST requests allowed.' });
   }
 
   try{
     const {username,password} = req.body;
     if (!username || !password) {
-      return res.status(400).json({ message: 'All fields are mandatory.' });
+      return res.status(400).json({ error: true, message: 'All fields are mandatory.' });
     }
 
     const existingUser = await UserModel.findOne({ username }).exec();
@@ -37,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `loggedIn=true; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
       `role=${role};HttpOnly; Path=/; Max-Age=${process.env.COOKIE_EXPIRE_TIME}`,
     ])
-    return res.status(200).json({error:false,accessToken,username});
+    return res.status(200).json({error:false,accessToken,username,role});
 
 
   }catch(e){

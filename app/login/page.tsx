@@ -3,16 +3,36 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import styles from './login.module.css'
-
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
 
-  const handleSubmit = (e: any) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
+    const userUrl = 'http://localhost:3000/api/users/login';
+    const adminUrl = 'http://localhost:3000/api/admin/login';
     
+    const response = await axios.post((rememberMe)?adminUrl:userUrl, 
+      { 
+        username, 
+        password
+      },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+      )
+      if(response.data.role === 'Student'){
+        router.push('/dashboard');
+      }
+      if(response.data.role !== 'Student'){
+        router.push('/admin/dashboard');
+      }
   }
 
   return (
@@ -24,10 +44,10 @@ const Page = () => {
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="UserName"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className={styles.input}
           />
           <input
@@ -44,7 +64,7 @@ const Page = () => {
               onChange={() => setRememberMe(!rememberMe)}
               className={styles.checkbox}
             />
-            Remember Me
+            Admin Login
           </label>
           <button type="submit" className={styles.button}>
             SIGN IN

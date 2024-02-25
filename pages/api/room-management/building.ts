@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import buildingModel from '@/models/buildingModel';
+import { authenticateMiddleware,userDetailsFromToken , UserPayload } from '@/service/user.service';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const method = req.method;
@@ -8,17 +9,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     switch (method) {
         case "GET":
-            try{
-                await buildingModel.find({}, (err: any, data: any) => {
-                    if (err) {
-                        return res.status(500).json({ error: true, message: "An error occured" });
-                    }
-                    return res.status(200).json(data);
-                });
-            }
-            catch(err) {
-                return res.status(500).json({ error: true, message: "An error occured" });
-            }
+            await authenticateMiddleware(req,res, async()=>{
+                const token = req.cookies.token as string;
+                const tokenDetials = userDetailsFromToken(token) as UserPayload;
+                try{
+                    await buildingModel.find({}, (err: any, data: any) => {
+                        if (err) {
+                            return res.status(500).json({ error: true, message: "An error occured" });
+                        }
+                        return res.status(200).json(data);
+                    });
+                }
+                catch(err) {
+                    return res.status(500).json({ error: true, message: "An error occured" });
+                }
+            })
+            break;
         case "POST":
             try{
                 const building = await buildingModel.findOne({buildingId: req.body.buildingId});
