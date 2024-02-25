@@ -1,7 +1,6 @@
 import mongoose, { Document, model } from 'mongoose';
 
 interface BookingDocument extends Document {
-    bookingId: string;
     roomId: string;
     eventDate: string;
     bookingPurpose: string;
@@ -11,7 +10,6 @@ interface BookingDocument extends Document {
 
 const BookingSchema = new mongoose.Schema<BookingDocument>(
     {
-        bookingId: { type: String, required: true, unique: true },
         roomId: { type: String, required: true },
         eventDate: { type: String, required: true },
         bookingPurpose: { type: String, required: true },
