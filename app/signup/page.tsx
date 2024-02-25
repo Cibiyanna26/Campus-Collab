@@ -7,7 +7,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
-const HOSTED_URL = process.env.HOSTED_URL as string;
+const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 const Page = () => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')

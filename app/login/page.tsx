@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
 
-const {HOSTED_URL} = process.env;
+const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 
 const Page = () => {
   const [username, setUsername] = useState('')

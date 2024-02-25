@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { ToastContainer, toast } from 'react-toastify';
 import Booking from '@/components/Booking';
-const HOSTED_URL = process.env.HOSTED_URL as string;
+const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 function getTodayAndNext6Days() {
     const result = [];
     const today = new Date();

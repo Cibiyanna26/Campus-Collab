@@ -5,7 +5,7 @@ import BuildingBox from '@/components/BuildingBox';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-const HOSTED_URL = process.env.HOSTED_URL as string;
+const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 const Page = () => {
   const [rooms,setRoom] = useState([]);
   const router = useRouter();

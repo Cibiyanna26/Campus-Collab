@@ -15,7 +15,7 @@ interface BookingStruct {
     setShow:Function,
 }
 
-const HOSTED_URL = process.env.HOSTED_URL as string;
+const HOSTED_URL = process.env.NEXT_PUBLIC_HOSTED_URL as string;
 
 const Booking = (props : BookingStruct) => {
     const {roomId, eventDate, bookingPerson,period, setShow} = props;
