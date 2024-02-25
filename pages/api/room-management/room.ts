@@ -15,6 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 } catch (err) {
                     return res.status(500).json({ error: true, message: err });
                 }
+
             })
             break;
         case "POST":

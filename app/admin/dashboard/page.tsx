@@ -29,8 +29,13 @@ const Page = () => {
     },[])
 
     const getAllRooms = async () =>{
+      try{
         const response = await axios.get(`${HOSTED_URL}/api/room-management/room`);
         setRoom(response.data.message)
+      }catch(e:any){
+        console.log(e.response.data.message)
+      }
+        
     }
 
 
