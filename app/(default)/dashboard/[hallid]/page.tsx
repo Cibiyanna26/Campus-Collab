@@ -104,9 +104,11 @@ const Page = ({params}:{params:{hallid:string}}) => {
         <div className='relative'>
             {
                 (show) ? 
-                <div className='absolute z-50 bg-white flex justify-center items-center'>
-                    <Booking roomId={roomId} eventDate={eventDate} 
-                    bookingPerson={bookingPerson} period={period} setShow={setShow}/>
+                <div className='w-full h-full flex justify-center'>
+                    <div className='absolute z-50 flex justify-center items-center'>
+                        <Booking roomId={roomId} eventDate={eventDate} 
+                        bookingPerson={bookingPerson} period={period} setShow={setShow}/>
+                    </div>
                 </div>
                 :
                 <></>
