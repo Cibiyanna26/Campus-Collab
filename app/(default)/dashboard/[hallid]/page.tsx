@@ -136,7 +136,7 @@ const Page = ({params}:{params:{hallid:string}}) => {
                          }
                         
                     </div>
-                    <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[1]===1 ?'bg-green-400' : 'bg-gray-200"}  p-2`}>
+                    <div className={`h-[15rem] rounded-xl overflow-hidden ${currentBook[1]===1 ?'bg-green-400' : 'bg-gray-200'}  p-2`}>
                         <h1 className='font-bold'>2st Period</h1>
                         {
                             (currentBook[1] === 1) ? <p>"Slot is booked"</p>
